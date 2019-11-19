@@ -36,18 +36,18 @@ int device_open(struct inode *inode, struct file *flip)
     */
     if (down_interruptible(&virtual_dev.sem) != 0)
     {
-        printk(KERN_ALERT "myCharDevice: couldn't lock device during open");
+        printk(KERN_ALERT "myCharDevice: couldn't lock device during open\n");
         return -1;
     }
 
-    printk(KERN_INFO "myCharDevice: Opened device");
+    printk(KERN_INFO "myCharDevice: Opened device\n");
     return 0;
 }
 
 // Called when the user wants to read the device
 ssize_t device_read(struct file *filp, char *dataBuffer, size_t bufCount, loff_t *curOffset)
 {
-    printk(KERN_INFO "myCharDevice: Reading from device");
+    printk(KERN_INFO "myCharDevice: Reading from device\n");
     ret = copy_to_user(dataBuffer, virtual_dev.data, bufCount);
     return ret;
 }
@@ -58,7 +58,7 @@ ssize_t device_write(struct file *filp, const char *dataBuffer, size_t bufCount,
     // send data from user to kernel
     if (bufCount >= DEVICE_SIZE) // buff size check to avoid memory leak
         bufCount = DEVICE_SIZE;
-    printk(KERN_INFO "myCharDevice: Writing to device");
+    printk(KERN_INFO "myCharDevice: Writing to device\n");
     ret = copy_from_user(virtual_dev.data, dataBuffer, bufCount);
     return ret;
 }
@@ -68,7 +68,7 @@ int device_close(struct inode *inode, struct file *flip)
 {
     // Release mutext obtained when device open allowing other processes to access it
     up(&virtual_dev.sem);
-    printk(KERN_INFO "myCharDevice: Closed device");
+    printk(KERN_INFO "myCharDevice: Closed device\n");
     return 0;
 }
 
@@ -89,12 +89,12 @@ static int __init driver_entry(void)
     ret = alloc_chrdev_region(&dev_num, 0, 1, DEVICE_NAME);
     if (ret < 0)
     {
-        printk(KERN_ALERT "myCharDevice: failed to allocate a major number");
+        printk(KERN_ALERT "myCharDevice: failed to allocate a major number\n");
         return ret;
     }
     major_number = MAJOR(dev_num);
-    printk(KERN_INFO "myCharDevice: major number == %d", major_number);
-    printk(KERN_INFO "\tuse \"mknod /dev/%s c %d 0\" to create our device file", DEVICE_NAME, major_number);
+    printk(KERN_INFO "myCharDevice: major number == %d\n", major_number);
+    printk(KERN_INFO "\tuse \"mknod /dev/%s c %d 0\" to create our device file\n", DEVICE_NAME, major_number);
 
     mcdev = cdev_alloc(); // Initialize cdev structure
     mcdev->ops = &fops;   // Assignes file operations to it
@@ -102,7 +102,7 @@ static int __init driver_entry(void)
     ret = cdev_add(mcdev, dev_num, 1); // add cdev to kernel since
     if (ret < 0)
     {
-        printk(KERN_ALERT "myCharDevice: unable to add cdev to kernel");
+        printk(KERN_ALERT "myCharDevice: unable to add cdev to kernel\n");
         return ret;
     }
     // Init our semaphore with a value of 1
@@ -115,7 +115,7 @@ static void __exit driver_exit(void)
     // unregister everything (must be in reverse order)
     cdev_del(mcdev);
     unregister_chrdev_region(dev_num, 1);
-    printk(KERN_ALERT "myCharDevice: unallocated module");
+    printk(KERN_ALERT "myCharDevice: unallocated module\n");
 }
 
 // Module initialization and exit
