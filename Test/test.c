@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#define DEVICE_FILE "/dev/solidusdevice"
+#define DEVICE_FILE "/dev/myCharDevice"
 
 #define DEV_DATA_SIZE 200 // size of device
 
