@@ -21,6 +21,7 @@ To compile the driver and insert it, you must do the following:
 You will need super user privilages to use "make insert"
 
 4. Look at your syslog to see any additional instruction the driver has.
+
 To look at it write the command: 
 
 	dmesg
