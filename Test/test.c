@@ -20,11 +20,8 @@ int main()
         exit(-1);
     }
 
-    int is_continue = 1; // sets
 
-    while (is_continue)
-    {
-        printf("r = read from device\nw = write to device\nAny other key exits the program\nEnter command: ");
+        printf("r = read from device\nw = write to device\nEnter command: ");
         scanf("%c", &cmd);
         switch (cmd)
         {
@@ -39,11 +36,9 @@ int main()
             break;
 
         default:
-            printf("Exiting program\n");
-            is_continue = 0;
+            printf("Unrecognized command\n");
             break;
         }
-    }
     close(fd);
     return 0;
 }
