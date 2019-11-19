@@ -24,9 +24,11 @@ You will need super user privilages to use "make insert"
 To look at it write the command: 
 
 	dmesg
+	
 or:
 
 	cat /var/log/syslog
+	
 It will give you instructions on how to insert your device
 
 5. Once you are done doing the instructions, and following any in
@@ -63,11 +65,15 @@ If you want to remove your executable you compiled, write:
 To remove your driver and clean your Driver directory, do the following:
 
 1. Move to driver directory in the terminal, expected output:
+
 		/path/to/repo/Linux-Virtual-Character-Driver/Driver$
+		
 2. Remove your module by writing:
 
 		make remove
+		
 You need to have super user privilages
+
 3. Clean your Driver directory by doing the following:
 
 		make clean
