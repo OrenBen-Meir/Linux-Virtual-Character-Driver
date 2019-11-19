@@ -30,32 +30,31 @@ or:
 
 	cat /var/log/syslog
 	
-It will give you instructions on how to insert your device
+It will give you instructions on how to insert your device.
+Please follow them.
 
-5. Once you are done doing the instructions, and following any in
+5. To allow the device to be usable without super user privilages to test it, write:
+
+		make usrdevpriv
+
+6. Once you are done doing the instructions, and following any in
 the syslog, you can test your module.
 
 ## Testing your module
 
-To test your driver, you could use either gcc or python.
+To test your driver, you need gcc.
 You need to be in the Test directory in your terminal with the expected output:
 		/path/to/repo/Linux-Virtual-Character-Driver/Test$
 
-#### Using python
-
-Just type:
-
-	python test.py
-
-#### Using c/gcc
-
-To compile, type:
+To compile your test, type:
 
 	gcc -o test test.c
 
 To run your executable, type:
 
 	./test
+
+You can rerun your executable as many times as you need
 
 If you want to remove your executable you compiled, write:
 
@@ -78,6 +77,10 @@ You need to have super user privilages
 3. Clean your Driver directory by doing the following:
 
 		make clean
+
+4. To remove your device, write thr following:
+
+		make remdev
 
 
 

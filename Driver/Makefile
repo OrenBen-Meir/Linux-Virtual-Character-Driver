@@ -12,5 +12,11 @@ clean:
 insert:
 	insmod char_dvr.ko
 
+usrdevpriv:
+	chmod 777 /dev/myCharDevice
+
+remdev:
+	rm /dev/myCharDevice
+
 remove:
 	rmmod char_dvr
