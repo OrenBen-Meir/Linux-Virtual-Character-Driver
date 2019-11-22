@@ -12,7 +12,7 @@ clean:
 insert:
 	insmod char_dvr.ko
 
-usrdevpriv:
+device-usable:
 	chmod 777 /dev/myCharDevice
 
 remdev:

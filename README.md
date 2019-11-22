@@ -35,7 +35,7 @@ Please follow them.
 
 5. To allow the device to be usable without super user privilages to test it, write:
 
-		make usrdevpriv
+		make device-usable
 
 6. Once you are done doing the instructions, and following any in
 the syslog, you can test your module.
