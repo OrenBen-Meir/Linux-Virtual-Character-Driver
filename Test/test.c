@@ -23,21 +23,20 @@ int main()
 
         printf("r = read from device\nw = write to device\nEnter command: ");
         scanf("%c", &cmd);
-        switch (cmd)
+        if (cmd == 'w')
         {
-        case 'w':
-            printf("Enter data: ");
+        	printf("Enter data: ");
             scanf(" %[^\n]", write_buf);
             write(fd, write_buf, sizeof(write_buf));
-            break;
-        case 'r':
-            read(fd, read_buf, sizeof(read_buf));
+        }
+        else if (cmd == 'r')
+        {
+        	read(fd, read_buf, sizeof(read_buf));
             printf("device contents:\n%s\n", read_buf);
-            break;
-
-        default:
-            printf("Unrecognized command\n");
-            break;
+        }
+        else
+        {
+        	printf("Unrecognized command\n");
         }
     close(fd);
     return 0;
